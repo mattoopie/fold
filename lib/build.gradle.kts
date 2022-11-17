@@ -4,6 +4,8 @@ plugins {
 
     // Apply the java-library plugin for API and implementation separation.
     `java-library`
+
+    `maven-publish`
 }
 
 repositories {
@@ -24,8 +26,6 @@ tasks.test {
     useJUnitPlatform()
 }
 
-version = "0.0.1"
-
 java {
     withSourcesJar()
 }
@@ -38,5 +38,25 @@ tasks.jar {
                 "Implementation-Version" to project.version
             )
         )
+    }
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("fold") {
+            groupId = "org.eend"
+            artifactId = "fold"
+            version = "1.0.0"
+            from(components["java"])
+
+            pom {
+                this.name.set("Fold")
+                this.description.set("More advanced folds for Kotlin")
+            }
+        }
+    }
+
+    repositories {
+        // TODO Publish
     }
 }

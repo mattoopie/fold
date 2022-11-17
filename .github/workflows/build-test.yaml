@@ -2,7 +2,8 @@ name: Run Gradle build and test
 
 on:
   push:
-    - master
+    - branches:
+        - master
 
 jobs:
   gradle-build-test:

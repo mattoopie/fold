@@ -1,6 +1,7 @@
 # Advanced folds for Kotlin
 
 [![Build and test](https://github.com/mattoopie/fold/actions/workflows/build-test.yaml/badge.svg)](https://github.com/mattoopie/fold/actions/workflows/build-test.yaml)
+[![Maven central](https://img.shields.io/maven-central/v/org.eend/fold?label=Maven%20Central&logo=apachemaven)](https://mvnrepository.com/artifact/org.eend/fold)
 
 More advanced fold methods for Kotlin, for use only after mastering:
 

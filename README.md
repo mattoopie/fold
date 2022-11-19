@@ -3,6 +3,8 @@
 [![Build and test](https://github.com/mattoopie/fold/actions/workflows/build-test.yaml/badge.svg)](https://github.com/mattoopie/fold/actions/workflows/build-test.yaml)
 [![Maven central](https://img.shields.io/maven-central/v/org.eend/fold?label=Maven%20Central&logo=apachemaven)](https://mvnrepository.com/artifact/org.eend/fold)
 
+## Description
+
 More advanced fold methods for Kotlin, for use only after mastering:
 
 1. do while
@@ -10,7 +12,24 @@ More advanced fold methods for Kotlin, for use only after mastering:
 3. foldRight
 4. foldRightIndexed
 
-## Sandwich
+## Installation
+
+The library is available as Maven artifact on [Maven Central](https://mvnrepository.com/artifact/org.eend/fold).
+You can use it as a dependency in your project, for example using Gradle (Kotlin DSL):
+
+```kotlin
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("org.eend:fold:2.0.0")
+}
+```
+
+## Available fold methods
+
+### Sandwich
 
 * foldSandwich
 * foldSandwichIndexed
@@ -30,7 +49,7 @@ val foldedSandwich = list.foldSandwich("") { first: String, currentValue: String
 println(foldedSandwich) // Prints: "Sandwich"
 ```
 
-## Zigzag
+### Zigzag
 
 * foldZigzag
 * foldZigzagIndexed
@@ -48,7 +67,7 @@ val result = list.foldZigzag("") { currentValue: String, next: String ->
 println(result) // Prints: "Zigzag"
 ```
 
-## Random
+### Random
 
 * foldRandom
 * foldRandomIndexed

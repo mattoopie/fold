@@ -13,3 +13,5 @@ This library currently supports:
 
 * foldSandwich
 * foldSandwichIndexed
+* foldZigzag
+* foldZigzagIndexed

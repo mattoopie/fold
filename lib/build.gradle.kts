@@ -1,15 +1,14 @@
-plugins {
-    // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
-    id("org.jetbrains.kotlin.jvm") version "1.7.21"
+import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.archivesName
 
-    // Apply the java-library plugin for API and implementation separation.
+plugins {
+    id("org.jetbrains.kotlin.jvm") version "1.7.21"
     `java-library`
 
     `maven-publish`
+    signing
 }
 
 repositories {
-    // Use Maven Central for resolving dependencies.
     mavenCentral()
 }
 
@@ -22,12 +21,14 @@ dependencies {
     testImplementation("org.assertj:assertj-core:3.23.1")
 }
 
-tasks.test {
-    useJUnitPlatform()
-}
+
+group = "org.eend"
+archivesName.set("fold")
+version = "1.0.0"
 
 java {
     withSourcesJar()
+    withJavadocJar()
 }
 
 tasks.jar {
@@ -41,22 +42,61 @@ tasks.jar {
     }
 }
 
+tasks.test {
+    useJUnitPlatform()
+}
+
 publishing {
     publications {
         create<MavenPublication>("fold") {
-            groupId = "org.eend"
             artifactId = "fold"
-            version = "1.0.0"
             from(components["java"])
 
             pom {
-                this.name.set("Fold")
-                this.description.set("More advanced folds for Kotlin")
+                name.set("Fold")
+                description.set("More advanced folds for Kotlin")
+                url.set("https://github.com/mattoopie/fold")
+                licenses {
+                    license {
+                        name.set("MIT License")
+                        url.set("http://www.opensource.org/licenses/mit-license.php")
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("mattoopie")
+                        name.set("Marcel van Heerdt")
+                        email.set("developer@eend.org")
+                    }
+                }
+                scm {
+                    connection.set("scm:git:git://github.com/mattoopie/fold.git")
+                    developerConnection.set("scm:git:ssh://github.com/mattoopie/fold.git")
+                    url.set("https://github.com/mattoopie/fold")
+                }
             }
         }
     }
 
     repositories {
-        // TODO Publish
+        maven {
+            val isSnapshot = version.toString().endsWith("SNAPSHOT")
+            if (isSnapshot) {
+                name = "MavenCentralSnapshot"
+                url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+            } else {
+                name = "MavenCentralStaging"
+                url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+            }
+
+            credentials {
+                username = "${properties["ossrhUsername"]}"
+                password = "${properties["ossrhPassword"]}"
+            }
+        }
     }
+}
+
+signing {
+    sign(publishing.publications.getByName("fold"))
 }

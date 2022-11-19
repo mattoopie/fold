@@ -6,7 +6,7 @@ package org.eend.fold
  */
 inline fun <T, ACC> List<T>.foldZigzag(
     initial: ACC,
-    transform: (nextValue: T, ACC) -> ACC
+    transform: (ACC, nextValue: T) -> ACC
 ): ACC {
     var current: ACC = initial
     if (!isEmpty()) {
@@ -14,9 +14,9 @@ inline fun <T, ACC> List<T>.foldZigzag(
         val startIterator = listIterator()
         val endIterator = listIterator(size)
         while (count < this.size) {
-            current = transform(startIterator.next(), current)
+            current = transform(current, startIterator.next())
             if (this.size - count > 1) {
-                current = transform(endIterator.previous(), current)
+                current = transform(current, endIterator.previous())
             }
             count += 2
         }
@@ -25,13 +25,13 @@ inline fun <T, ACC> List<T>.foldZigzag(
 }
 
 /**
- * Accumulates the resulting sandwich by going from the start and back of the list simultaneously.
+ * Accumulates the result by going from the start and back of the list simultaneously.
  * If an odd number of items is in the initial list, the center value is lost.
- * Also provides the indexes of the current slices of bread.
+ * Also provides the index of the current item.
  */
 inline fun <T, ACC> List<T>.foldZigzagIndexed(
     initial: ACC,
-    transform: (index: Int, nextValue: T, ACC) -> ACC
+    transform: (index: Int, ACC, nextValue: T) -> ACC
 ): ACC {
     var current: ACC = initial
     if (!isEmpty()) {
@@ -39,9 +39,9 @@ inline fun <T, ACC> List<T>.foldZigzagIndexed(
         val startIterator = listIterator()
         val endIterator = listIterator(size)
         while (count < this.size) {
-            current = transform(startIterator.nextIndex(), startIterator.next(), current)
+            current = transform(startIterator.nextIndex(), current, startIterator.next())
             if (this.size - count > 1) {
-                current = transform(endIterator.previousIndex(), endIterator.previous(), current)
+                current = transform(endIterator.previousIndex(), current, endIterator.previous())
             }
             count += 2
         }

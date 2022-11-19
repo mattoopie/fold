@@ -12,7 +12,7 @@ class FoldZigzagKtTest {
     @Test
     fun `folding zero items returns initial value`() {
         val list = emptyList<Int>()
-        val foldResult = list.foldZigzag(INITIAL_VALUE) { nextValue: Int, currentValue: String ->
+        val foldResult = list.foldZigzag(INITIAL_VALUE) { currentValue: String, nextValue: Int ->
             "$currentValue$nextValue"
         }
         assertThat(foldResult).isEqualTo(INITIAL_VALUE)
@@ -21,7 +21,7 @@ class FoldZigzagKtTest {
     @Test
     fun `folding one item returns first value`() {
         val list = listOf(1)
-        val foldResult = list.foldZigzag(INITIAL_VALUE) { nextValue: Int, currentValue: String ->
+        val foldResult = list.foldZigzag(INITIAL_VALUE) { currentValue: String, nextValue: Int ->
             "$currentValue$nextValue"
         }
         assertThat(foldResult).isEqualTo("1")
@@ -30,7 +30,7 @@ class FoldZigzagKtTest {
     @Test
     fun `folding two items returns initial value with first and second value added to that`() {
         val list = listOf(1, 2)
-        val foldResult = list.foldZigzag(INITIAL_VALUE) { nextValue: Int, currentValue: String ->
+        val foldResult = list.foldZigzag(INITIAL_VALUE) { currentValue: String, nextValue: Int ->
             "$currentValue$nextValue"
         }
 
@@ -41,7 +41,7 @@ class FoldZigzagKtTest {
     @Test
     fun `folding three items returns initial value with first and last value added to that`() {
         val list = listOf(1, 2, 3)
-        val foldResult = list.foldZigzag(INITIAL_VALUE) { nextValue: Int, currentValue: String ->
+        val foldResult = list.foldZigzag(INITIAL_VALUE) { currentValue: String, nextValue: Int ->
             "$currentValue$nextValue"
         }
 
@@ -55,8 +55,8 @@ class FoldZigzagKtTest {
         val list = ('a'..'d').toList()
         val foldResult =
             list.foldZigzagIndexed(INITIAL_VALUE) { index: Int,
-                                                    _: Char,
-                                                    currentValue: String ->
+                                                    currentValue: String,
+                                                    _: Char ->
                 "$currentValue$index"
             }
 
@@ -70,8 +70,8 @@ class FoldZigzagKtTest {
         val list = ('a'..'e').toList()
         val foldResult =
             list.foldZigzagIndexed(INITIAL_VALUE) { index: Int,
-                                                    _: Char,
-                                                    currentValue: String ->
+                                                    currentValue: String,
+                                                    _: Char ->
                 "$currentValue$index"
             }
 

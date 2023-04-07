@@ -24,7 +24,7 @@ dependencies {
 
 group = "org.eend"
 archivesName.set("fold")
-version = "2.0.2"
+version = "2.1.0"
 
 java {
     withSourcesJar()

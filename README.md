@@ -23,7 +23,7 @@ repositories {
 }
 
 dependencies {
-    implementation("org.eend:fold:2.0.2")
+    implementation("org.eend:fold:2.1.0")
 }
 ```
 

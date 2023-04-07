@@ -7,10 +7,10 @@
 
 More advanced fold methods for Kotlin, for use only after mastering:
 
-1. do while
-2. fold
-3. foldRight
-4. foldRightIndexed
+1. `do {} while()`
+2. `fold`
+3. `foldRight`
+4. `foldRightIndexed`
 
 ## Installation
 
@@ -31,13 +31,16 @@ dependencies {
 
 ### Sandwich
 
-* foldSandwich
-* foldSandwichIndexed
+* `foldSandwich`
+* `foldSandwichIndexed`
+* `foldSandwichNullable`
 
 Accumulates the lambda result based on the initial value, while simultaneously
 providing the first and last item of the list, working inwards towards the center of the list.
 
 If there is an odd number of items, the center item is not provided and is thus lost.
+An alternative for this is using `foldSandwichNullable`, which keeps the center item but also
+adds a null value.
 
 **Usage**
 
@@ -51,8 +54,8 @@ println(foldedSandwich) // Prints: "Sandwich"
 
 ### Zigzag
 
-* foldZigzag
-* foldZigzagIndexed
+* `foldZigzag`
+* `foldZigzagIndexed`
 
 Accumulates the lambda result based on the initial value, while alternating
 between the first and last item of the list. Starts with the first item.
@@ -69,8 +72,8 @@ println(result) // Prints: "Zigzag"
 
 ### Random
 
-* foldRandom
-* foldRandomIndexed
+* `foldRandom`
+* `foldRandomIndexed`
 
 Accumulates the lambda result based on the initial value, while randomly
 picking the next item. It is guaranteed that all items are provided to the lambda.
@@ -83,4 +86,20 @@ val result = list.foldRandom("") { currentValue: String, next: String ->
     "$currentValue$next"
 }
 println(result) // Prints one of: "admonR", "naRdmo", "danomR", and so on.
+```
+
+### Chaos
+
+* `foldChaos`
+
+Better do not use this one. It is guaranteed to cause a mess.
+
+**Usage**
+
+```kotlin
+val list = listOf("C", "h", "a", "o", "s", 5)
+val result = list.foldChaos("") { acc, next ->
+    acc + next
+}
+println(result) // Different result every time, for example: sBgVogd-1207019598hs5o
 ```

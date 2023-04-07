@@ -9,7 +9,7 @@ inline fun <T, ACC> List<T>.foldZigzag(
     transform: (ACC, nextValue: T) -> ACC
 ): ACC {
     var current: ACC = initial
-    if (!isEmpty()) {
+    if (isNotEmpty()) {
         var count = 0
         val startIterator = listIterator()
         val endIterator = listIterator(size)
@@ -34,7 +34,7 @@ inline fun <T, ACC> List<T>.foldZigzagIndexed(
     transform: (index: Int, ACC, nextValue: T) -> ACC
 ): ACC {
     var current: ACC = initial
-    if (!isEmpty()) {
+    if (isNotEmpty()) {
         var count = 0
         val startIterator = listIterator()
         val endIterator = listIterator(size)

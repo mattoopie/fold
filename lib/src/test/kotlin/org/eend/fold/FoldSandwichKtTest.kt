@@ -50,6 +50,32 @@ class FoldSandwichKtTest {
     }
 
     @Test
+    fun `using foldSandwichNullable keeps center value as top slice`() {
+        val list = listOf(1, 2, 3)
+        val foldedSandwich =
+            list.foldSandwichNullable(INITIAL_VALUE, true) { first: Int?, currentValue: String, last: Int? ->
+                "$currentValue$first$last"
+            }
+
+        val expectedSandwich = "13null2"
+        assertThat(foldedSandwich).isEqualTo(expectedSandwich)
+    }
+
+    @Test
+    fun `usinf foldSandwichNullable with an even number of values has same result as normal foldSandwich`() {
+        val list = listOf(1, 2)
+        val foldedSandwichNullable =
+            list.foldSandwichNullable(INITIAL_VALUE, true) { first: Int?, currentValue: String, last: Int? ->
+                "$currentValue$first$last"
+            }
+        val foldedSandwich = list.foldSandwich(INITIAL_VALUE) { first: Int, currentValue: String, last: Int ->
+            "$currentValue$first$last"
+        }
+
+        assertThat(foldedSandwichNullable).isEqualTo(foldedSandwich)
+    }
+
+    @Test
     fun `folding four items indexed provides correct indexes`() {
         val list = ('a'..'d').toList()
         val foldedSandwich =

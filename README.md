@@ -15,6 +15,8 @@ More advanced fold methods for Kotlin, for use only after mastering:
 ## Installation
 
 The library is available as Maven artifact on [Maven Central](https://mvnrepository.com/artifact/org.eend/fold).
+The latest version number can be found there
+or from [the latest GitHub release](https://github.com/mattoopie/fold/releases/latest).
 You can use it as a dependency in your project, for example using Gradle (Kotlin DSL):
 
 ```kotlin
@@ -23,7 +25,7 @@ repositories {
 }
 
 dependencies {
-    implementation("org.eend:fold:2.1.1")
+    implementation("org.eend:fold:x.y.z")
 }
 ```
 

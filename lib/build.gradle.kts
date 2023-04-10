@@ -24,7 +24,6 @@ dependencies {
 
 group = "org.eend"
 archivesName.set("fold")
-version = "2.1.0"
 
 java {
     withSourcesJar()
@@ -90,13 +89,16 @@ publishing {
             }
 
             credentials {
-                username = "${properties["ossrhUsername"]}"
-                password = "${properties["ossrhPassword"]}"
+                username = "${properties["sonatypeUsername"]}"
+                password = "${properties["sonatypePassword"]}"
             }
         }
     }
 }
 
 signing {
+    val signingKey: String? by project
+    val signingPassword: String? by project
+    useInMemoryPgpKeys(signingKey, signingPassword)
     sign(publishing.publications.getByName("fold"))
 }

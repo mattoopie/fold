@@ -25,6 +25,10 @@ dependencies {
 group = "org.eend"
 archivesName = "fold"
 
+kotlin {
+    jvmToolchain(21)
+}
+
 java {
     withSourcesJar()
     withJavadocJar()

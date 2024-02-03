@@ -24,7 +24,7 @@ class FoldChaosKtTest {
             acc + next
         }
         val expectedResult =
-            "App[Kotlin, Java, Rust]-3.47251328E82Some function value[Java, hW4pD6sywM, Rust, Rust, Rust]Apptrue"
+            "App[Kotlin, Java, Rust]-3.4725133E82Some function value[Java, hW4pD6sywM, Rust, Rust, Rust]Apptrue"
         assertThat(result).isEqualTo(expectedResult)
     }
 }

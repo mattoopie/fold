@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.archivesName
 
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "1.9.22"
+    kotlin("jvm") version "1.9.22"
     `java-library`
 
     `maven-publish`
@@ -23,7 +23,7 @@ dependencies {
 
 
 group = "org.eend"
-archivesName.set("fold")
+archivesName = "fold"
 
 java {
     withSourcesJar()
@@ -52,26 +52,26 @@ publishing {
             from(components["java"])
 
             pom {
-                name.set("Fold")
-                description.set("More advanced folds for Kotlin")
-                url.set("https://github.com/mattoopie/fold")
+                name = "Fold"
+                description = "More advanced folds for Kotlin"
+                url = "https://github.com/mattoopie/fold"
                 licenses {
                     license {
-                        name.set("MIT License")
-                        url.set("http://www.opensource.org/licenses/mit-license.php")
+                        name = "MIT License"
+                        url = "http://www.opensource.org/licenses/mit-license.php"
                     }
                 }
                 developers {
                     developer {
-                        id.set("mattoopie")
-                        name.set("Marcel van Heerdt")
-                        email.set("developer@eend.org")
+                        id = "mattoopie"
+                        name = "Marcel van Heerdt"
+                        email = "developer@eend.org"
                     }
                 }
                 scm {
-                    connection.set("scm:git:git://github.com/mattoopie/fold.git")
-                    developerConnection.set("scm:git:ssh://github.com/mattoopie/fold.git")
-                    url.set("https://github.com/mattoopie/fold")
+                    connection = "scm:git:git://github.com/mattoopie/fold.git"
+                    developerConnection = "scm:git:ssh://github.com/mattoopie/fold.git"
+                    url = "https://github.com/mattoopie/fold"
                 }
             }
         }

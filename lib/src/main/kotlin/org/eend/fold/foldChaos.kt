@@ -11,7 +11,7 @@ internal const val CHANCE_OF_CHAOS = 0.4
 /**
  * Better do not use this one. It is guaranteed to cause a mess.
  */
-inline fun <T, ACC> List<T>.foldChaos(
+inline fun <reified T, ACC> List<T>.foldChaos(
     initial: ACC,
     randomInstance: Random = Random.Default,
     transform: (ACC, nextValue: T) -> ACC
@@ -22,7 +22,6 @@ inline fun <T, ACC> List<T>.foldChaos(
         val randomIndex = (randomInstance.nextFloat() * (this.size - 1)).roundToInt()
         val nextValue = this[randomIndex]
         currentAcc = if (randomInstance.nextFloat() < CHANCE_OF_CHAOS) {
-            @Suppress("UNCHECKED_CAST")
             transform(currentAcc, introduceChaos(nextValue, randomInstance) as T)
         } else {
             transform(currentAcc, nextValue)

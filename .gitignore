@@ -7,3 +7,6 @@ build
 # Ignore IDEA files
 .idea
 *.iml
+
+# Ignore Kotlin data folder
+.kotlin

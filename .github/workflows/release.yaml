@@ -24,10 +24,10 @@ jobs:
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
       - name: Build and test
         run: ./gradlew build test
-      - name: Publish to Maven Central Staging
+      - name: Publish and release to Maven Central
         env:
           ORG_GRADLE_PROJECT_version: ${{ steps.version.outputs.VERSION }}
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.PGP_SECRET }}
-        run: ./gradlew publishFoldPublicationToMavenCentralRepository --no-configuration-cache
+        run: ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache

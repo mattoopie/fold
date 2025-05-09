@@ -116,5 +116,5 @@ mavenPublishing {
 }
 
 tasks.named("publishFoldPublicationToMavenCentralRepository") {
-    dependsOn(tasks.named("signFoldPublication"))
+    dependsOn(tasks.named("signMavenPublication"))
 }

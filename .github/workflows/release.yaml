@@ -22,11 +22,12 @@ jobs:
         uses: gradle/actions/setup-gradle@06832c7b30a0129d7fb559bcc6e43d26f6374244 # v4
         with:
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+      - name: Build and test
+        run: ./gradlew build test
       - name: Publish to Maven Central Staging
         env:
           ORG_GRADLE_PROJECT_version: ${{ steps.version.outputs.VERSION }}
-          ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.SONATYPE_USERNAME }}
-          ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.SONATYPE_PASSWORD }}
-          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.PGP_SECRET }}
-          ORG_GRADLE_PROJECT_signingPassword:
-        run: ./gradlew build test publishFoldPublicationToMavenCentralStagingRepository --no-daemon
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.PGP_SECRET }}
+        run: ./gradlew publishFoldPublicationToMavenCentralRepository --no-configuration-cache

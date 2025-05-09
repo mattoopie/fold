@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-    implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
+    implementation(platform("org.jetbrains.kotlin:kotlin-bom:2.1.20"))
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")

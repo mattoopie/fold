@@ -1,9 +1,10 @@
+import com.vanniktech.maven.publish.SonatypeHost
+
 plugins {
     kotlin("jvm") version "2.1.20"
     `java-library`
 
-    `maven-publish`
-    signing
+    id("com.vanniktech.maven.publish") version "0.31.0"
     base
 }
 
@@ -81,29 +82,35 @@ publishing {
             }
         }
     }
-
-    repositories {
-        maven {
-            val isSnapshot = version.toString().endsWith("SNAPSHOT")
-            if (isSnapshot) {
-                name = "MavenCentralSnapshot"
-                url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
-            } else {
-                name = "MavenCentralStaging"
-                url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
-            }
-
-            credentials {
-                username = "${properties["sonatypeUsername"]}"
-                password = "${properties["sonatypePassword"]}"
-            }
-        }
-    }
 }
 
-signing {
-    val signingKey: String? by project
-    val signingPassword: String? by project
-    useInMemoryPgpKeys(signingKey, signingPassword)
-    sign(publishing.publications.getByName("fold"))
+
+mavenPublishing {
+    pom {
+        name = "Fold"
+        description = "More advanced folds for Kotlin"
+        url = "https://github.com/mattoopie/fold"
+        licenses {
+            license {
+                name = "MIT License"
+                url = "http://www.opensource.org/licenses/mit-license.php"
+            }
+        }
+        developers {
+            developer {
+                id = "mattoopie"
+                name = "Marcel van Heerdt"
+                email = "developer@eend.org"
+            }
+        }
+        scm {
+            connection = "scm:git:git://github.com/mattoopie/fold.git"
+            developerConnection = "scm:git:ssh://github.com/mattoopie/fold.git"
+            url = "https://github.com/mattoopie/fold"
+        }
+    }
+
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+
+    signAllPublications()
 }

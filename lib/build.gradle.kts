@@ -1,10 +1,10 @@
 import com.vanniktech.maven.publish.SonatypeHost
 
 plugins {
-    kotlin("jvm") version "2.2.0"
+    kotlin("jvm") version "2.2.21"
     `java-library`
 
-    id("com.vanniktech.maven.publish") version "0.33.0"
+    id("com.vanniktech.maven.publish") version "0.35.0"
     base
 }
 
@@ -13,12 +13,12 @@ repositories {
 }
 
 dependencies {
-    implementation(platform("org.jetbrains.kotlin:kotlin-bom:2.2.0"))
+    implementation(platform("org.jetbrains.kotlin:kotlin-bom:2.2.21"))
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-    testImplementation("org.junit.jupiter:junit-jupiter:6.0.0")
-    testImplementation("org.assertj:assertj-core:3.27.3")
+    testImplementation("org.junit.jupiter:junit-jupiter:6.0.1")
+    testImplementation("org.assertj:assertj-core:3.27.6")
 }
 
 

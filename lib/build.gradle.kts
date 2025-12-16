@@ -6,7 +6,6 @@ plugins {
     `java-library`
 
     id("com.vanniktech.maven.publish") version "0.35.0"
-    base
 }
 
 repositories {
@@ -15,7 +14,7 @@ repositories {
 
 dependencies {
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:2.2.21"))
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation(kotlin("stdlib"))
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testImplementation("org.junit.jupiter:junit-jupiter:6.0.1")
@@ -30,11 +29,6 @@ base {
 
 kotlin {
     jvmToolchain(21)
-}
-
-java {
-    withSourcesJar()
-    withJavadocJar()
 }
 
 tasks.jar {

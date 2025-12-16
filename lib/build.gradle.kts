@@ -114,7 +114,7 @@ mavenPublishing {
 }
 
 tasks.withType<Sign>().configureEach {
-    dependsOn(tasks.named("plainJavadocJar"))
+    dependsOn(tasks.withType<Jar>().matching { it.archiveClassifier.get() == "javadoc" })
 }
 
 tasks.withType<PublishToMavenRepository>().configureEach {

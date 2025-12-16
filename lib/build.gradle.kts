@@ -113,6 +113,10 @@ mavenPublishing {
     signAllPublications()
 }
 
-tasks.withType<PublishToMavenRepository>() {
+tasks.withType<Sign>().configureEach {
+    dependsOn(tasks.named("plainJavadocJar"))
+}
+
+tasks.withType<PublishToMavenRepository>().configureEach {
     dependsOn(tasks.withType<Sign>())
 }

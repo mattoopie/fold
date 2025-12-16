@@ -1,3 +1,6 @@
+import com.vanniktech.maven.publish.JavadocJar
+import com.vanniktech.maven.publish.KotlinJvm
+
 plugins {
     kotlin("jvm") version "2.2.21"
     `java-library`
@@ -49,41 +52,15 @@ tasks.test {
     useJUnitPlatform()
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("fold") {
-            artifactId = "fold"
-            from(components["java"])
-
-            pom {
-                name = "Fold"
-                description = "More advanced folds for Kotlin"
-                url = "https://github.com/mattoopie/fold"
-                licenses {
-                    license {
-                        name = "MIT License"
-                        url = "http://www.opensource.org/licenses/mit-license.php"
-                    }
-                }
-                developers {
-                    developer {
-                        id = "mattoopie"
-                        name = "Marcel van Heerdt"
-                        email = "developer@eend.org"
-                    }
-                }
-                scm {
-                    connection = "scm:git:git://github.com/mattoopie/fold.git"
-                    developerConnection = "scm:git:ssh://github.com/mattoopie/fold.git"
-                    url = "https://github.com/mattoopie/fold"
-                }
-            }
-        }
-    }
-}
-
-
 mavenPublishing {
+    configure(
+        KotlinJvm(
+            javadocJar = JavadocJar.Javadoc(),
+            sourcesJar = true,
+        )
+    )
+
+    coordinates("org.eend", "fold")
     pom {
         name = "Fold"
         description = "More advanced folds for Kotlin"
@@ -108,14 +85,11 @@ mavenPublishing {
         }
     }
 
-    publishToMavenCentral(automaticRelease = true)
+    publishToMavenCentral(automaticRelease = true, validateDeployment = true)
 
     signAllPublications()
 }
 
-tasks.withType<Sign>().configureEach {
-    dependsOn(tasks.withType<Jar>().matching { it.archiveClassifier.get() == "javadoc" })
-}
 
 tasks.withType<PublishToMavenRepository>().configureEach {
     dependsOn(tasks.withType<Sign>())

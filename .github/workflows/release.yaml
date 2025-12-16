@@ -30,4 +30,4 @@ jobs:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.PGP_SECRET }}
-        run: ./gradlew publishFoldPublicationToMavenCentralRepository --no-configuration-cache
+        run: ./gradlew publishToMavenCentral --no-configuration-cache

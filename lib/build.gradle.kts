@@ -79,7 +79,7 @@ mavenPublishing {
         }
     }
 
-    publishToMavenCentral(automaticRelease = true, validateDeployment = true)
+    publishToMavenCentral(automaticRelease = true)
 
     signAllPublications()
 }

@@ -54,6 +54,24 @@ val foldedSandwich = list.foldSandwich("") { first: String, currentValue: String
 println(foldedSandwich) // Prints: "Sandwich"
 ```
 
+### Center Out
+
+* `foldCenterOut`
+* `foldCenterOutIndexed`
+
+Accumulates the lambda result by starting in the middle of the list and moving out towards both ends.
+For even-sized lists it starts with the left-middle item.
+
+**Usage**
+
+```kotlin
+val list = listOf("O", "u", "t", "n", "e", "r")
+val result = list.foldCenterOut("") { currentValue: String, next: String ->
+    "$currentValue$next"
+}
+println(result) // Prints: "tnOeur"
+```
+
 ### Zigzag
 
 * `foldZigzag`
@@ -70,6 +88,61 @@ val result = list.foldZigzag("") { currentValue: String, next: String ->
     "$currentValue$next"
 }
 println(result) // Prints: "Zigzag"
+```
+
+### Riffle
+
+* `foldRiffle`
+* `foldRiffleIndexed`
+
+Accumulates the lambda result by interleaving the first half of the list with the second half.
+If the list has an odd size, the first half contributes the extra item.
+
+**Usage**
+
+```kotlin
+val list = listOf("R", "f", "l", "i", "f", "e")
+val result = list.foldRiffle("") { currentValue: String, next: String ->
+    "$currentValue$next"
+}
+println(result) // Prints: "Riflef"
+```
+
+### Mitosis
+
+* `foldMitosis`
+* `foldMitosisIndexed`
+
+Accumulates the lambda result by visiting the first item of the current queue segment,
+then splitting the remainder into two smaller queued segments.
+
+**Usage**
+
+```kotlin
+val list = listOf("M", "i", "t", "o", "s", "i", "s")
+val result = list.foldMitosis("") { currentValue: String, next: String ->
+    "$currentValue$next"
+}
+println(result) // Prints: "Mistois"
+```
+
+### Palindrone
+
+* `foldPalindrone`
+* `foldPalindroneIndexed`
+
+Accumulates the lambda result by visiting the first half of the list,
+then revisiting that same half in reverse order.
+For odd-sized lists, the center item is part of the visited half.
+
+**Usage**
+
+```kotlin
+val list = listOf(1, 2, 3, 4, 5)
+val result = list.foldPalindrone("") { currentValue: String, next: Int ->
+    "$currentValue$next"
+}
+println(result) // Prints: "123321"
 ```
 
 ### Random
@@ -90,6 +163,41 @@ val result = list.foldRandom("") { currentValue: String, next: String ->
 println(result) // Prints one of: "admonR", "naRdmo", "danomR", and so on.
 ```
 
+### Russian Roulette
+
+* `foldRussianRoulette`
+* `foldRussianRouletteIndexed`
+
+Accumulates the lambda result in order, but every item has a chance to disappear before it is visited.
+
+**Usage**
+
+```kotlin
+val list = listOf(1, 2, 3, 4, 5, 6)
+val result = list.foldRussianRoulette("", chanceOfDisappearing = 0.5f) { currentValue: String, next: Int ->
+    "$currentValue$next"
+}
+println(result) // Prints a subsequence, for example: "246"
+```
+
+### Tournament
+
+* `foldTournament`
+* `foldTournamentIndexed`
+
+Pairs neighbours into rounds and lets the lambda decide which item advances.
+If a round has an odd number of items, the final item advances automatically.
+
+**Usage**
+
+```kotlin
+val list = listOf("ant", "wolf", "emu", "bear", "ox")
+val winner = list.foldTournament { left: String, right: String ->
+    if (left.length >= right.length) left else right
+}
+println(winner) // Prints: "wolf"
+```
+
 ### Chaos
 
 * `foldChaos`
@@ -104,4 +212,23 @@ val result = list.foldChaos("") { acc, next ->
     acc + next
 }
 println(result) // Different result every time, for example: sBgVogd-1207019598hs5o
+```
+
+### Quicksand
+
+* `foldQuicksand`
+* `foldQuicksandIndexed`
+
+Accumulates the lambda result in order, but every slow step sinks the accumulator deeper into quicksand.
+The deeper it sinks, the more garbled the output becomes.
+
+**Usage**
+
+```kotlin
+val list = listOf("Q", "u", "i", "c", "k", "s", "a", "n", "d")
+val result = list.foldQuicksand("") { currentValue: String, next: String ->
+    Thread.sleep(15)
+    "$currentValue$next"
+}
+println(result) // Prints something increasingly garbled, for example: "#@icksand"
 ```

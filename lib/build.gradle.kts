@@ -2,7 +2,7 @@ import com.vanniktech.maven.publish.JavadocJar
 import com.vanniktech.maven.publish.KotlinJvm
 
 plugins {
-    kotlin("jvm") version "2.3.20"
+    kotlin("jvm") version "2.3.21"
     `java-library`
 
     id("com.vanniktech.maven.publish") version "0.36.0"
@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-    implementation(platform("org.jetbrains.kotlin:kotlin-bom:2.3.20"))
+    implementation(platform("org.jetbrains.kotlin:kotlin-bom:2.3.21"))
     implementation(kotlin("stdlib"))
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
